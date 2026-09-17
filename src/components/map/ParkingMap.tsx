@@ -36,12 +36,24 @@ export const ParkingMap: React.FC<ParkingMapProps> = ({
       zoomControl: false,
     });
 
-    // OpenStreetMap CartoDB Positron / OSM standard tiles (clean & modern)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    // CartoDB Positron (light) public basemap CDN (keyless)
+    const cartoLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19,
-    }).addTo(map);
+    });
+
+    // Fallback gracefully to standard OpenStreetMap if any tile loading issues occur
+    cartoLayer.on('tileerror', () => {
+      console.warn('Carto tile load failure detected. Falling back to OpenStreetMap standard tiles.');
+      cartoLayer.remove();
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+      }).addTo(map);
+    });
+
+    cartoLayer.addTo(map);
 
     mapInstanceRef.current = map;
 
