@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Fraunces', serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #F5F1E8;
+    color: #1A2E2B;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Custom Leaflet Map styling to match Renovate Africa aesthetic */
+.leaflet-container {
+  font-family: var(--font-sans) !important;
+  background-color: #e9e4d6 !important;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 32px -4px rgba(0, 77, 64, 0.18) !important;
+  padding: 4px !important;
+  border: 1px solid rgba(0, 77, 64, 0.12) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff !important;
+}
+
+/* Custom Marker Pulse */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.marker-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}

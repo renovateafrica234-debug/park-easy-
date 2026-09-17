@@ -1,0 +1,7 @@
+{
+  "name": "ParkEasy Abuja",
+  "description": "Real-time parking availability, digital bay reservation, and cashless Paystack payments across Abuja, Nigeria.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
