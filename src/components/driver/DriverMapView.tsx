@@ -31,11 +31,14 @@ export const DriverMapView: React.FC<DriverMapViewProps> = ({
   const [districtFilter, setDistrictFilter] = useState<string>(initialDistrictFilter || 'All');
   const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
 
-  const districts = ['All', 'Wuse 2', 'Central Business District', 'Maitama', 'Garki 2', 'Jabi', 'Utako'];
+  const districts = ['All', 'Wuse 2', 'Central Business District', 'Maitama', 'Jabi', 'Garki', 'Utako'];
 
   // Filter lots by district and search query
   const filteredLots = lots.filter((lot) => {
-    const matchesDistrict = districtFilter === 'All' || lot.district === districtFilter;
+    const matchesDistrict =
+      districtFilter === 'All' ||
+      lot.district.toLowerCase() === districtFilter.toLowerCase() ||
+      lot.district.toLowerCase().includes(districtFilter.toLowerCase());
     const matchesSearch =
       lot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lot.address.toLowerCase().includes(searchQuery.toLowerCase()) ||

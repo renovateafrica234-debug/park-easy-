@@ -36,6 +36,11 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
+  // Detect user's current location when the app loads
+  useEffect(() => {
+    handleLocateMe();
+  }, []);
+
   // Request browser geolocation with fallback to Abuja Central
   const handleLocateMe = () => {
     if (!navigator.geolocation) {
